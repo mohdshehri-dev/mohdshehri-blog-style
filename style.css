@@ -70,3 +70,9 @@
 .subscribe .formkit-spinner { display: none; }
 .subscribe .formkit-submit[data-active] .formkit-spinner { display: inline-block; }
 .subscribe form { margin: 0; }
+
+/* subscribe card: enforce full width & centering regardless of context */
+.subscribe-band { display: block; width: 100%; clear: both; }
+.subscribe-band .subscribe { display: block; width: calc(100% - 44px); max-width: 42rem;
+  margin: 0 auto; float: none; }
+.subscribe .formkit-fields { width: 100%; }
