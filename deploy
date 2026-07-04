@@ -1,11 +1,13 @@
 #!/bin/bash
-# deploy: push style.css changes live and purge the CDN cache
+# deploy: push style.css/live.js changes live and purge the CDN cache
 set -e
 cd "$(dirname "$0")"
 git add -A
-git commit -m "${1:-style update}
+git commit -m "${1:-update}
 
 Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>" || true
 git push -q
-curl -s "https://purge.jsdelivr.net/gh/mohdshehri-dev/mohdshehri-blog-style@main/style.css" > /dev/null
-echo "✓ live: https://cdn.jsdelivr.net/gh/mohdshehri-dev/mohdshehri-blog-style@main/style.css"
+for f in style.css live.js; do
+  curl -s "https://purge.jsdelivr.net/gh/mohdshehri-dev/mohdshehri-blog-style@main/$f" > /dev/null
+done
+echo "✓ live"
