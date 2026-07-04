@@ -34,3 +34,55 @@
     }
   });
 })();
+
+/* --- share buttons under each post (item pages) ----------------------- */
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    if (!document.body.classList.contains('item')) return;
+    var body = document.querySelector('.post-body');
+    if (!body || document.querySelector('.share-row')) return;
+
+    var canonical = document.querySelector('link[rel="canonical"]');
+    var url = (canonical && canonical.href) || location.href.split('#')[0];
+    var titleEl = document.querySelector('.post-title');
+    var title = (titleEl ? titleEl.textContent : document.title).trim();
+
+    var row = document.createElement('div');
+    row.className = 'share-row';
+    row.innerHTML = '<span class="share-label">شارك:</span>';
+
+    function btn(text, href) {
+      var a = document.createElement('a');
+      a.className = 'share-btn';
+      a.textContent = text;
+      a.href = href;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      return a;
+    }
+    row.appendChild(btn('X', 'https://twitter.com/intent/tweet?text=' +
+      encodeURIComponent(title) + '&url=' + encodeURIComponent(url)));
+    row.appendChild(btn('واتساب', 'https://wa.me/?text=' +
+      encodeURIComponent(title + '\n' + url)));
+
+    var copy = document.createElement('a');
+    copy.className = 'share-btn';
+    copy.textContent = 'نسخ الرابط';
+    copy.href = '#';
+    copy.addEventListener('click', function (e) {
+      e.preventDefault();
+      (navigator.clipboard ? navigator.clipboard.writeText(url)
+        : Promise.reject()).then(function () {
+        copy.textContent = 'تم النسخ ✓';
+        setTimeout(function () { copy.textContent = 'نسخ الرابط'; }, 2000);
+      }).catch(function () { prompt('انسخ الرابط:', url); });
+    });
+    row.appendChild(copy);
+
+    body.parentNode.insertBefore(row, body.nextSibling);
+  });
+})();
