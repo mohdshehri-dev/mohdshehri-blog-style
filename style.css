@@ -57,3 +57,16 @@
 .subscribe .formkit-submit:hover, .subscribe .formkit-submit:hover > span { background: #8C4227 !important; }
 .subscribe .formkit-guarantee, .subscribe .formkit-powered-by-convertkit-container { opacity: .55; }
 .subscribe .formkit-alert { font-family: Tajawal, sans-serif; }
+
+/* Kit form: alerts + bits we handle ourselves (Kit's own <style> is stripped) */
+.subscribe .formkit-alert { list-style: none; margin: 0 auto 14px; padding: 0; width: 100%; }
+.subscribe .formkit-alert:empty { display: none; }
+.subscribe .formkit-alert li { font-family: Tajawal, sans-serif; font-size: .92rem;
+  padding: 10px 16px; border-radius: 8px; margin: 0 0 8px; }
+.subscribe .formkit-alert-error li { background: #FDEDE7; border: 1px solid #B25B3B; color: #8C4227; }
+.subscribe .formkit-alert-success li, .subscribe .formkit-alert.formkit-alert-success {
+  background: #EFF5EC; border: 1px solid #7A9B6D; color: #4A6B3F;
+  font-family: Tajawal, sans-serif; padding: 10px 16px; border-radius: 8px; }
+.subscribe .formkit-spinner { display: none; }
+.subscribe .formkit-submit[data-active] .formkit-spinner { display: inline-block; }
+.subscribe form { margin: 0; }
