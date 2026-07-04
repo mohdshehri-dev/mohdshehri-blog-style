@@ -1,0 +1,6 @@
+/* ============================================================
+   mohdshehri.com — live style overrides
+   Loaded AFTER the theme's built-in CSS, so rules here win.
+   The blog is fully styled even if this file never loads.
+   ============================================================ */
+:root { --live-css: active; }
