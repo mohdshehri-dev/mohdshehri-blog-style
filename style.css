@@ -4,3 +4,13 @@
    The blog is fully styled even if this file never loads.
    ============================================================ */
 :root { --live-css: active; }
+
+/* Posts: true Helvetica look — Arabic falls back to Arial (Helvetica's
+   metric twin with real Arabic), NOT Tajawal. Headings stay Amiri. */
+.post-body, .post-body * {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.post-body h2, .post-body h3, .post-body h4,
+.post-body h2 *, .post-body h3 *, .post-body h4 * {
+  font-family: 'Amiri', 'Noto Naskh Arabic', Georgia, serif !important;
+}
