@@ -1,6 +1,5 @@
 #!/bin/bash
-# deploy: push style.css/live.js live (GitHub Pages, ~1-2 min to propagate,
-# browsers refresh within 10 min thanks to max-age=600)
+# deploy: push style.css/live.js/loader.js and purge jsDelivr (serves from repo, no Pages)
 set -e
 cd "$(dirname "$0")"
 git add -A
@@ -8,4 +7,7 @@ git commit -m "${1:-update}
 
 Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>" || true
 git push -q
-echo "✓ pushed — live at https://mohdshehri-dev.github.io/mohdshehri-blog-style/ within ~2 min"
+for f in loader.js style.css live.js; do
+  curl -s "https://purge.jsdelivr.net/gh/mohdshehri-dev/mohdshehri-blog-style@main/$f" > /dev/null
+done
+echo "✓ live via jsDelivr (readers fresh within 10 min)"
