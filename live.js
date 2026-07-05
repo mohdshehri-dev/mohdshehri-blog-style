@@ -127,3 +127,30 @@
     });
   });
 })();
+
+/* --- book card in the footer (site-wide) ------------------------------- */
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    var footer = document.querySelector('.site-footer');
+    if (!footer || footer.querySelector('.book-card')) return;
+    var card = document.createElement('a');
+    card.className = 'book-card';
+    card.href = 'https://tashkeell.com/ar/ZYDmrXm';
+    card.target = '_blank';
+    card.rel = 'noopener';
+    card.innerHTML =
+      '<img alt="غلاف كتاب من على بوابة الأربعين" src="https://mohdshehri-dev.github.io/mohdshehri-blog-style/book-cover.png" />' +
+      '<span class="book-card-text">' +
+        '<span class="book-card-kicker">صدر للكاتب</span>' +
+        '<span class="book-card-title">من على بوابة الأربعين</span>' +
+        '<span class="book-card-sub">خواطر الغربة والابتعاث — أحاديث طريق وسواليف مقهى</span>' +
+        '<span class="book-card-cta">اقتنِ الكتاب ←</span>' +
+      '</span>';
+    var anchor = footer.querySelector('.colophon');
+    footer.insertBefore(card, anchor);
+  });
+})();
