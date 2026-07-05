@@ -129,3 +129,9 @@
   .book-card { flex-direction: column; text-align: center; }
   .book-card-text { text-align: center; align-items: center; }
 }
+
+/* book card sits above the author card */
+.site-footer .book-card { margin-top: 6px; }
+/* kill the orange Blogger icon beside the author name, all variants */
+.author-card img:not(.profile-img), .author-card .icon,
+.author-card svg { display: none !important; }

@@ -150,7 +150,7 @@
         '<span class="book-card-sub">خواطر الغربة والابتعاث — أحاديث طريق وسواليف مقهى</span>' +
         '<span class="book-card-cta">اقتنِ الكتاب ←</span>' +
       '</span>';
-    var anchor = footer.querySelector('.colophon');
+    var anchor = footer.querySelector('.author-card') || footer.querySelector('.colophon');
     footer.insertBefore(card, anchor);
   });
 })();
