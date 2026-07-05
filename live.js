@@ -97,7 +97,8 @@
     var ul = document.querySelector('.site-nav .PageList ul, .site-nav .LinkList ul');
     if (!ul) return;
     var EXTRAS = [
-      { title: 'صحة', url: 'https://www.mohdshehri.com/search/label/صحة' }
+      { title: 'صحة', url: 'https://www.mohdshehri.com/search/label/صحة' },
+      { title: 'الأكثر قراءة', url: 'https://www.mohdshehri.com/p/blog-page_143.html' }
     ];
     var here = decodeURIComponent(location.href).replace(/[?#].*$/, '').replace(/\/+$/, '');
     EXTRAS.forEach(function (item) {
