@@ -101,3 +101,9 @@
   font-size: 1.5rem !important; line-height: 1.6 !important;
   font-family: 'Amiri', 'Noto Naskh Arabic', Georgia, serif !important;
 }
+
+/* reading size: 18px on desktop (Arabic reads small; matches Substack/Medium norms).
+   Mobile keeps the theme's 1rem. */
+@media (min-width: 641px) {
+  .post-body, .post-body.entry-content { font-size: 1.125rem !important; }
+}
