@@ -90,3 +90,14 @@
 .post-body > :first-child { margin-top: 0 !important; padding-top: 0 !important; }
 .post-body > :last-child { margin-bottom: 0 !important; }
 .post-body > br:first-child { display: none; }
+
+/* total size unification: EVERYTHING in a post inherits the body size,
+   except headings which have their own fixed scale */
+.post-body :not(h1):not(h2):not(h3):not(h4) {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+.post-body h1 { /* stray h1s in old posts render like h2 */
+  font-size: 1.5rem !important; line-height: 1.6 !important;
+  font-family: 'Amiri', 'Noto Naskh Arabic', Georgia, serif !important;
+}
