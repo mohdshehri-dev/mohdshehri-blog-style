@@ -86,3 +86,43 @@
     body.parentNode.insertBefore(row, body.nextSibling);
   });
 })();
+
+/* --- extra nav pills (added via pipeline, no Layout edit needed) ------- */
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    var ul = document.querySelector('.site-nav .PageList ul, .site-nav .LinkList ul');
+    if (!ul) return;
+    var EXTRAS = [
+      { title: 'صحة', url: 'https://www.mohdshehri.com/search/label/صحة' }
+    ];
+    var here = decodeURIComponent(location.href).replace(/[?#].*$/, '').replace(/\/+$/, '');
+    EXTRAS.forEach(function (item) {
+      // skip if already present (e.g., user later adds it in Layout)
+      var exists = Array.prototype.some.call(ul.querySelectorAll('a'), function (a) {
+        return decodeURIComponent(a.href || '').indexOf(encodeURI ? item.url.split('/').pop() : '') !== -1 &&
+               a.textContent.trim() === item.title;
+      });
+      if (exists) return;
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = item.url;
+      a.textContent = item.title;
+      if (decodeURIComponent(a.href).replace(/[?#].*$/, '').replace(/\/+$/, '') === here) {
+        a.classList.add('active');
+      }
+      li.appendChild(a);
+      // insert before the last static-page link (لماذا أكتب؟) if present
+      var lis = ul.querySelectorAll('li');
+      var anchor = null;
+      for (var i = 0; i < lis.length; i++) {
+        var link = lis[i].querySelector('a');
+        if (link && /\/p\//.test(link.getAttribute('href') || '')) { anchor = lis[i]; break; }
+      }
+      ul.insertBefore(li, anchor);
+    });
+  });
+})();
