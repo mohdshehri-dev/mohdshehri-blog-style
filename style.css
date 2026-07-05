@@ -85,3 +85,8 @@
   color: #B25B3B; padding: 7px 18px; border: 1px solid #E7DBC8; border-radius: 999px;
   text-decoration: none; transition: all .15s ease; }
 .share-btn:hover { background: #B25B3B; color: #fff; border-color: #B25B3B; }
+
+/* uniform post start: first/last elements flush, no stray gaps */
+.post-body > :first-child { margin-top: 0 !important; padding-top: 0 !important; }
+.post-body > :last-child { margin-bottom: 0 !important; }
+.post-body > br:first-child { display: none; }
