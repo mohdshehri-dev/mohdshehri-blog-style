@@ -38,22 +38,31 @@
 /* --- meta description for posts (auto-generated map in descriptions.js;
        a description saved natively in the Blogger editor always wins) ---- */
 (function () {
-  var map = window.__postDescs;
-  if (!map) return;
-  var desc = map[location.pathname.replace(/\/$/, '') || '/'];
-  if (!desc) return;
-  if (document.querySelector('meta[name="description"]')) return;
-  var m = document.createElement('meta');
-  m.name = 'description';
-  m.content = desc;
-  document.head.appendChild(m);
-  var og = document.querySelector('meta[property="og:description"]');
-  if (!og) {
-    og = document.createElement('meta');
-    og.setAttribute('property', 'og:description');
-    document.head.appendChild(og);
+  function inject() {
+    var map = window.__postDescs;
+    if (!map) return;
+    var desc = map[location.pathname.replace(/\/$/, '') || '/'];
+    if (!desc) return;
+    if (document.querySelector('meta[name="description"]')) return;
+    var m = document.createElement('meta');
+    m.name = 'description';
+    m.content = desc;
+    document.head.appendChild(m);
+    var og = document.querySelector('meta[property="og:description"]');
+    if (!og) {
+      og = document.createElement('meta');
+      og.setAttribute('property', 'og:description');
+      document.head.appendChild(og);
+    }
+    og.setAttribute('content', desc);
   }
-  og.setAttribute('content', desc);
+  if (window.__postDescs) { inject(); return; }
+  /* self-load the map: works regardless of which loader.js version is cached */
+  var v = Math.floor(Date.now() / 600000);
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/gh/mohdshehri-dev/mohdshehri-blog-style@main/descriptions.js?v=' + v;
+  s.onload = inject;
+  document.head.appendChild(s);
 })();
 
 /* --- favicon: replace Blogger's default orange icon -------------------- */
