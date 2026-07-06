@@ -35,6 +35,18 @@
   });
 })();
 
+/* --- favicon: replace Blogger's default orange icon -------------------- */
+(function () {
+  var href = 'https://cdn.jsdelivr.net/gh/mohdshehri-dev/mohdshehri-blog-style@main/favicon.png';
+  var old = document.querySelectorAll('link[rel~="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]');
+  Array.prototype.forEach.call(old, function (l) { l.parentNode.removeChild(l); });
+  var link = document.createElement('link');
+  link.rel = 'icon';
+  link.type = 'image/png';
+  link.href = href;
+  document.head.appendChild(link);
+})();
+
 /* --- share buttons under each post (item pages) ----------------------- */
 (function () {
   function ready(fn) {
