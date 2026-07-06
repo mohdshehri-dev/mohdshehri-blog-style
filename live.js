@@ -35,6 +35,27 @@
   });
 })();
 
+/* --- meta description for posts (auto-generated map in descriptions.js;
+       a description saved natively in the Blogger editor always wins) ---- */
+(function () {
+  var map = window.__postDescs;
+  if (!map) return;
+  var desc = map[location.pathname.replace(/\/$/, '') || '/'];
+  if (!desc) return;
+  if (document.querySelector('meta[name="description"]')) return;
+  var m = document.createElement('meta');
+  m.name = 'description';
+  m.content = desc;
+  document.head.appendChild(m);
+  var og = document.querySelector('meta[property="og:description"]');
+  if (!og) {
+    og = document.createElement('meta');
+    og.setAttribute('property', 'og:description');
+    document.head.appendChild(og);
+  }
+  og.setAttribute('content', desc);
+})();
+
 /* --- favicon: replace Blogger's default orange icon -------------------- */
 (function () {
   var href = 'https://cdn.jsdelivr.net/gh/mohdshehri-dev/mohdshehri-blog-style@main/favicon.png';

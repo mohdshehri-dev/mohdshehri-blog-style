@@ -7,7 +7,7 @@ git commit -m "${1:-update}
 
 Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>" || true
 git push -q
-for f in loader.js style.css live.js; do
+for f in loader.js style.css live.js descriptions.js; do
   curl -s "https://purge.jsdelivr.net/gh/mohdshehri-dev/mohdshehri-blog-style@main/$f" > /dev/null
 done
 echo "✓ live via jsDelivr (readers fresh within 10 min)"

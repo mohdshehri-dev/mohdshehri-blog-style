@@ -7,8 +7,14 @@
   l.rel = 'stylesheet';
   l.href = base + 'style.css?v=' + v;
   document.head.appendChild(l);
+  /* descriptions.js must run before live.js — async=false keeps dynamic
+     scripts in insertion order (defer alone doesn't for dynamic scripts) */
+  var d = document.createElement('script');
+  d.async = false;
+  d.src = base + 'descriptions.js?v=' + v;
+  document.head.appendChild(d);
   var s = document.createElement('script');
-  s.defer = true;
+  s.async = false;
   s.src = base + 'live.js?v=' + v;
   document.head.appendChild(s);
 })();
