@@ -60,14 +60,14 @@
   /* self-load the map: works regardless of which loader.js version is cached */
   var v = Math.floor(Date.now() / 600000);
   var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/gh/mohdshehri-dev/mohdshehri-blog-style@main/descriptions.js?v=' + v;
+  s.src = 'https://mohdshehri-dev.github.io/mohdshehri-blog-style/descriptions.js?v=' + v;
   s.onload = inject;
   document.head.appendChild(s);
 })();
 
 /* --- favicon: replace Blogger's default orange icon -------------------- */
 (function () {
-  var href = 'https://cdn.jsdelivr.net/gh/mohdshehri-dev/mohdshehri-blog-style@main/favicon.png';
+  var href = 'https://mohdshehri-dev.github.io/mohdshehri-blog-style/favicon.png';
   var old = document.querySelectorAll('link[rel~="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]');
   Array.prototype.forEach.call(old, function (l) { l.parentNode.removeChild(l); });
   var link = document.createElement('link');

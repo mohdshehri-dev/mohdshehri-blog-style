@@ -2,7 +2,8 @@
    This file rarely changes — the assets it loads carry the real updates. */
 (function () {
   var v = Math.floor(Date.now() / 600000); /* changes every 10 minutes */
-  var base = 'https://cdn.jsdelivr.net/gh/mohdshehri-dev/mohdshehri-blog-style@main/';
+  /* GitHub Pages: ~10-min cache, no purge needed (jsDelivr left us stale-cached 2026-07-06) */
+  var base = 'https://mohdshehri-dev.github.io/mohdshehri-blog-style/';
   var l = document.createElement('link');
   l.rel = 'stylesheet';
   l.href = base + 'style.css?v=' + v;
