@@ -196,3 +196,29 @@
     footer.insertBefore(card, anchor);
   });
 })();
+
+/* --- hide صحة posts from the main chronological stream -----------------
+       (homepage + its older/newer pagination). They stay fully visible on
+       the صحة label page, in search results, archives, and direct links. */
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    var path = location.pathname;
+    var isStream = path === '/' ||
+      (path === '/search' && !/[?&]q=/.test(location.search));
+    if (!isStream) return;
+    var outers = document.querySelectorAll('.post-outer');
+    for (var i = 0; i < outers.length; i++) {
+      var labels = outers[i].querySelectorAll('.post-labels a');
+      for (var j = 0; j < labels.length; j++) {
+        if (decodeURIComponent(labels[j].href).indexOf('/search/label/صحة') !== -1) {
+          outers[i].style.display = 'none';
+          break;
+        }
+      }
+    }
+  });
+})();
