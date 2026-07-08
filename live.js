@@ -210,8 +210,20 @@
     var isStream = path === '/' ||
       (path === '/search' && !/[?&]q=/.test(location.search));
     if (!isStream) return;
+    /* صحة posts live before 2026-07-08 stay on the homepage; only
+       later ones are hidden (grandfathered list, keep in sync if needed) */
+    var keep = {
+      '/2026/07/blog-post_07.html': 1,
+      '/2026/07/blog-post.html': 1,
+      '/2025/08/blog-post.html': 1,
+      '/2022/05/blog-post.html': 1,
+      '/2017/01/blog-post_2.html': 1,
+      '/2016/04/blog-post_6.html': 1
+    };
     var outers = document.querySelectorAll('.post-outer');
     for (var i = 0; i < outers.length; i++) {
+      var title = outers[i].querySelector('.post-title a');
+      if (title && keep[decodeURIComponent(new URL(title.href).pathname)]) continue;
       var labels = outers[i].querySelectorAll('.post-labels a');
       for (var j = 0; j < labels.length; j++) {
         if (decodeURIComponent(labels[j].href).indexOf('/search/label/صحة') !== -1) {
