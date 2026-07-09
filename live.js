@@ -197,6 +197,56 @@
   });
 })();
 
+/* --- site-wide Person JSON-LD (links the blog to the doctor page) ------
+       skipped on the doctor page itself, which carries Physician schema */
+(function () {
+  if (location.pathname === '/p/blog-page_08.html') return;
+  var s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.text = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': 'https://www.mohdshehri.com/#person',
+    name: 'محمد عبدالله الشهري',
+    alternateName: 'Dr. Mohammed Abdullah Alshehri',
+    url: 'https://www.mohdshehri.com/',
+    jobTitle: 'استشاري أمراض الكلى وأستاذ مشارك بكلية الطب',
+    affiliation: {
+      '@type': 'CollegeOrUniversity',
+      name: 'جامعة الملك خالد — كلية الطب',
+      address: { '@type': 'PostalAddress', addressLocality: 'أبها', addressCountry: 'SA' }
+    },
+    sameAs: ['https://www.mohdshehri.com/p/blog-page_08.html']
+  });
+  document.head.appendChild(s);
+})();
+
+/* --- author card: link to the doctor page ------------------------------ */
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    var card = document.querySelector('.author-card');
+    if (!card || card.querySelector('.med-link')) return;
+    var profileLink = card.querySelector('.profile-link');
+    var a = document.createElement('a');
+    a.className = 'med-link';
+    a.href = 'https://www.mohdshehri.com/p/blog-page_08.html';
+    a.textContent = 'صفحتي الطبية';
+    if (profileLink && profileLink.parentNode) {
+      var sep = document.createElement('span');
+      sep.className = 'med-link-sep';
+      sep.textContent = ' · ';
+      profileLink.parentNode.insertBefore(sep, profileLink.nextSibling);
+      profileLink.parentNode.insertBefore(a, sep.nextSibling);
+    } else {
+      card.appendChild(a);
+    }
+  });
+})();
+
 /* --- hide صحة posts from the main chronological stream -----------------
        (homepage + its older/newer pagination). They stay fully visible on
        the صحة label page, in search results, archives, and direct links. */
