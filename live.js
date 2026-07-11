@@ -129,6 +129,24 @@
   });
 })();
 
+/* --- newsletter form up to the end of the post (item pages) ------------
+       the band otherwise sits below the empty comments block and the
+       pager, where a reader who just finished the post never sees it */
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    if (!document.body.classList.contains('item')) return;
+    var band = document.querySelector('.subscribe-band');
+    var row = document.querySelector('.share-row') || document.querySelector('.post-body');
+    if (!band || !row) return;
+    row.parentNode.insertBefore(band, row.nextSibling);
+    band.style.margin = '10px 0';
+  });
+})();
+
 /* --- extra nav pills (added via pipeline, no Layout edit needed) ------- */
 (function () {
   function ready(fn) {
