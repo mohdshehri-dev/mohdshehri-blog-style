@@ -158,7 +158,8 @@
     if (!ul) return;
     var EXTRAS = [
       { title: 'صحة', url: 'https://www.mohdshehri.com/search/label/صحة' },
-      { title: 'الأكثر قراءة', url: 'https://www.mohdshehri.com/p/blog-page_143.html' }
+      { title: 'الأكثر قراءة', url: 'https://www.mohdshehri.com/p/blog-page_143.html' },
+      { title: 'أسئلة المرضى', url: 'https://www.mohdshehri.com/p/blog-page_11.html' }
     ];
     var here = decodeURIComponent(location.href).replace(/[?#].*$/, '').replace(/\/+$/, '');
     EXTRAS.forEach(function (item) {
