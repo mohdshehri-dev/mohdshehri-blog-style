@@ -168,3 +168,37 @@
   color: #B25B3B; text-decoration: none;
   border-bottom: 1px dotted #D9A990; padding-bottom: 2px; }
 .archive-picks a:hover { color: #8C4227; border-bottom-color: #8C4227; }
+
+/* Patient Q&A page (/p/blog-page_11.html) ------------------------------- */
+.post-body p.qa-lede { font-family: Tajawal, sans-serif !important;
+  font-size: .97rem !important; color: #5B5148 !important; line-height: 2 !important; }
+.post-body div.qa-notice { font-family: Tajawal, sans-serif !important;
+  font-size: .85rem !important; color: #93816C !important; line-height: 1.9 !important;
+  border: 1px solid #E7DBC8; border-radius: 10px; padding: 12px 16px;
+  background: #FDFAF4 !important; margin: 18px 0 34px; }
+.post-body div.qa-item { border-top: 1px solid #E7DBC8; padding: 24px 0 4px; }
+.post-body div.qa-item h3 { margin: 0 0 10px; }
+.post-body p.qa-more, .post-body p.qa-more a { font-family: Tajawal, sans-serif !important;
+  font-size: .88rem !important; }
+.post-body p.qa-more a { text-decoration: none;
+  border-bottom: 1px dotted #D9A990; padding-bottom: 2px; }
+
+/* ask box (injected by live.js once the form backend is wired) */
+.post-body div.qa-ask { margin-top: 48px; background: #FDFAF4 !important;
+  border: 1px solid #E7DBC8; border-radius: 14px; padding: 34px 26px; text-align: center; }
+.post-body div.qa-ask p.qa-ask-sub { font-family: Tajawal, sans-serif !important;
+  font-size: .92rem !important; color: #5B5148 !important; margin: 0 0 20px; line-height: 1.9 !important; }
+.qa-ask textarea { display: block; width: 100%; max-width: 460px; margin: 0 auto 12px;
+  min-height: 110px; font-family: Tajawal, sans-serif; font-size: 1rem;
+  padding: 12px 16px; resize: vertical; border: 1px solid #E7DBC8;
+  border-radius: 8px; background: #FBF6EE; color: #2C2622; }
+.qa-ask textarea:focus { outline: none; border-color: #B25B3B; }
+.qa-ask button { background: #B25B3B; color: #fff; border: 0; border-radius: 8px;
+  cursor: pointer; font-family: Tajawal, sans-serif; font-weight: 500;
+  font-size: .95rem; padding: 12px 34px; }
+.qa-ask button:hover { background: #8C4227; }
+.qa-ask button[disabled] { opacity: .6; cursor: default; }
+.post-body p.qa-ask-fine { font-family: Tajawal, sans-serif !important;
+  font-size: .78rem !important; color: #93816C !important; margin: 14px 0 0; line-height: 1.8 !important; }
+.post-body p.qa-ask-done { font-family: Tajawal, sans-serif !important;
+  font-size: 1rem !important; color: #2C2622 !important; line-height: 2 !important; }
