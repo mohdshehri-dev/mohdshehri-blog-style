@@ -188,6 +188,44 @@
   });
 })();
 
+/* --- homepage: from-the-archive links -----------------------------------
+       internal links from the highest-authority page to posts that sit
+       near page one in Google with impressions but almost no clicks */
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    if (location.pathname !== '/') return;
+    if (document.querySelector('.archive-picks')) return;
+    var PICKS = [
+      { t: 'سبع عجاف', u: '/2020/06/blog-post.html' },
+      { t: 'أنا لا أحب شرب الحليب', u: '/2018/10/blog-post_21.html' },
+      { t: 'كيف تكون طبيب امتياز', u: '/2018/09/blog-post.html' },
+      { t: 'قصتي مع محمود شاكر', u: '/2020/01/blog-post.html' },
+      { t: 'لماذا تتحجر قلوب الأطباء أمام الموت؟', u: '/2020/11/blog-post.html' }
+    ];
+    var box = document.createElement('nav');
+    box.className = 'archive-picks';
+    var h = document.createElement('h3');
+    h.textContent = 'من أرشيف المدونة';
+    box.appendChild(h);
+    var ul = document.createElement('ul');
+    PICKS.forEach(function (p) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = p.u;
+      a.textContent = p.t;
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+    var pager = document.querySelector('.blog-pager');
+    if (pager && pager.parentNode) pager.parentNode.insertBefore(box, pager);
+  });
+})();
+
 /* --- book card in the footer (site-wide) ------------------------------- */
 (function () {
   function ready(fn) {
