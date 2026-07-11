@@ -303,6 +303,53 @@
   });
 })();
 
+/* --- patient Q&A page: ask box (submits to the user's Google Form) ----- */
+(function () {
+  var ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSc4s8eeu7L0qb7Ks7Ik2W2H0ST-dNa1ZLtRLvRybSiPBsauOw/formResponse';
+  var ENTRY = 'entry.1990910686';
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    if (location.pathname !== '/p/blog-page_11.html') return;
+    var slot = document.getElementById('qa-ask');
+    if (!slot || slot.firstChild) return;
+    slot.className = 'qa-ask';
+    var h = document.createElement('h2');
+    h.textContent = 'عندك سؤال عام؟';
+    var sub = document.createElement('p');
+    sub.className = 'qa-ask-sub';
+    sub.textContent = 'اكتب سؤالك هنا — الأسئلة المختارة تُجاب في هذه الصفحة إجابةً عامة، ولا تُرسل ردود شخصية.';
+    var ta = document.createElement('textarea');
+    ta.placeholder = 'سؤالك… من غير أسماء أو تفاصيل شخصية';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = 'أرسل سؤالك';
+    var fine = document.createElement('p');
+    fine.className = 'qa-ask-fine';
+    fine.textContent = 'لا نجمع اسمك ولا بريدك — السؤال فقط. وليصلك جديد الأجوبة، اشترك في النشرة أسفل الصفحة.';
+    slot.appendChild(h); slot.appendChild(sub); slot.appendChild(ta);
+    slot.appendChild(btn); slot.appendChild(fine);
+    btn.addEventListener('click', function () {
+      var q = ta.value.trim();
+      if (!q) { ta.focus(); return; }
+      btn.disabled = true;
+      btn.textContent = 'يُرسل…';
+      var body = new FormData();
+      body.append(ENTRY, q);
+      function done() {
+        var ok = document.createElement('p');
+        ok.className = 'qa-ask-done';
+        ok.textContent = 'وصل سؤالك، شكرًا لك. الأسئلة المختارة تُجاب في هذه الصفحة تباعًا.';
+        slot.replaceChild(ok, ta);
+        slot.removeChild(btn);
+      }
+      fetch(ACTION, { method: 'POST', mode: 'no-cors', body: body }).then(done, done);
+    });
+  });
+})();
+
 /* --- hide صحة posts from the main chronological stream -----------------
        (homepage + its older/newer pagination). They stay fully visible on
        the صحة label page, in search results, archives, and direct links. */
