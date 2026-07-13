@@ -65,6 +65,24 @@
   document.head.appendChild(s);
 })();
 
+/* --- homepage meta description (the «الشهري» query shows the homepage
+       with no snippet — 50 impressions, 0 clicks in GSC) ----------------- */
+(function () {
+  if (location.pathname !== '/') return;
+  if (document.querySelector('meta[name="description"]')) return;
+  var desc = 'المدونة الشخصية للدكتور محمد عبدالله الشهري — استشاري أمراض الكلى ' +
+    'وأستاذ مشارك بكلية الطب في جامعة الملك خالد بأبها. تأملات ومقالات ويوميات سفر، ' +
+    'وتدوينات صحية موثوقة عن الكلى.';
+  var m = document.createElement('meta');
+  m.name = 'description';
+  m.content = desc;
+  document.head.appendChild(m);
+  var og = document.createElement('meta');
+  og.setAttribute('property', 'og:description');
+  og.setAttribute('content', desc);
+  document.head.appendChild(og);
+})();
+
 /* --- favicon: replace Blogger's default orange icon -------------------- */
 (function () {
   var href = 'https://mohdshehri-dev.github.io/mohdshehri-blog-style/favicon.png';
@@ -201,6 +219,8 @@
     if (location.pathname !== '/') return;
     if (document.querySelector('.archive-picks')) return;
     var PICKS = [
+      { t: 'أمريكا التي رأيت أنا', u: '/2021/12/blog-post.html' },
+      { t: 'بين الطب والفلسفة/المنطق', u: '/2018/09/blog-post_22.html' },
       { t: 'سبع عجاف', u: '/2020/06/blog-post.html' },
       { t: 'أنا لا أحب شرب الحليب', u: '/2018/10/blog-post_21.html' },
       { t: 'كيف تكون طبيب امتياز', u: '/2018/09/blog-post.html' },
