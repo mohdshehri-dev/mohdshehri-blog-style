@@ -203,3 +203,12 @@
   font-size: .78rem !important; color: #93816C !important; margin: 14px 0 0; line-height: 1.8 !important; }
 .post-body p.qa-ask-done { font-family: Tajawal, sans-serif !important;
   font-size: 1rem !important; color: #2C2622 !important; line-height: 2 !important; }
+
+/* related-reads block (appended to indexed صحة posts, 2026-07-18 —
+   internal links for crawl discovery; sits above the doc-byline) */
+.post-body div.related-reads { margin-top: 42px; padding-top: 20px;
+  border-top: 1px solid #E7DBC8; }
+.post-body div.related-reads p { font-family: Tajawal, sans-serif !important;
+  font-size: .88rem !important; color: #93816C !important; margin: 0 0 10px; }
+.post-body div.related-reads ul { margin: 0; padding-inline-start: 1.3em; }
+.post-body div.related-reads li { margin: .35em 0; font-size: .98rem !important; }
