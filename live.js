@@ -395,16 +395,90 @@
       '/2016/04/blog-post_6.html': 1
     };
     var outers = document.querySelectorAll('.post-outer');
+    var present = {};   /* paths already served on this page (visible or hidden) */
+    var visible = 0;
     for (var i = 0; i < outers.length; i++) {
       var title = outers[i].querySelector('.post-title a');
-      if (title && keep[decodeURIComponent(new URL(title.href).pathname)]) continue;
+      var p = title ? decodeURIComponent(new URL(title.href).pathname) : null;
+      if (p) present[p] = 1;
+      if (p && keep[p]) { visible++; continue; }
+      var hid = false;
       var labels = outers[i].querySelectorAll('.post-labels a');
       for (var j = 0; j < labels.length; j++) {
         if (decodeURIComponent(labels[j].href).indexOf('/search/label/صحة') !== -1) {
           outers[i].style.display = 'none';
+          hid = true;
           break;
         }
       }
+      if (!hid) visible++;
     }
+
+    /* Backfill: when hiding depletes the FRONT page (a صحة publishing burst
+       can fill all 12 server slots), pull the newest non-صحة posts from the
+       blog's own feed so the stream is never empty. Front page only —
+       older pages would get wrong-era posts injected. */
+    if (path !== '/' || visible >= 5) return;
+    var container = document.querySelector('.blog-posts');
+    if (!container) return;
+    var MONTHS = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+      'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+    fetch('/feeds/posts/summary?alt=json&orderby=published&max-results=40')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var entries = (data.feed && data.feed.entry) || [];
+        var added = 0, target = 10 - visible;
+        for (var i = 0; i < entries.length && added < target; i++) {
+          var e = entries[i];
+          var alt = (e.link || []).filter(function (l) { return l.rel === 'alternate'; })[0];
+          if (!alt) continue;
+          var p = decodeURIComponent(new URL(alt.href).pathname);
+          if (present[p]) continue;
+          var cats = (e.category || []).map(function (c) { return c.term; });
+          if (cats.indexOf('صحة') !== -1 && !keep[p]) continue;
+
+          var outer = document.createElement('div');
+          outer.className = 'post-outer';
+          var post = document.createElement('div');
+          post.className = 'post hentry';
+          var h3 = document.createElement('h3');
+          h3.className = 'post-title entry-title';
+          var ta = document.createElement('a');
+          ta.href = alt.href;
+          ta.textContent = e.title.$t;
+          h3.appendChild(ta);
+          var body = document.createElement('div');
+          body.className = 'post-body entry-content';
+          var para = document.createElement('p');
+          para.textContent = ((e.summary && e.summary.$t) || '').slice(0, 600);
+          body.appendChild(para);
+          var rm = document.createElement('div');
+          rm.className = 'read-more';
+          var ra = document.createElement('a');
+          ra.href = alt.href;
+          ra.textContent = 'متابعة القراءة ←';
+          rm.appendChild(ra);
+          var foot = document.createElement('div');
+          foot.className = 'post-footer';
+          var ts = document.createElement('span');
+          ts.className = 'post-timestamp';
+          var d = new Date(e.published.$t);
+          var tl = document.createElement('a');
+          tl.className = 'timestamp-link';
+          tl.href = alt.href;
+          tl.textContent = MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+          ts.appendChild(document.createTextNode('في '));
+          ts.appendChild(tl);
+          foot.appendChild(ts);
+          post.appendChild(h3);
+          post.appendChild(body);
+          post.appendChild(rm);
+          post.appendChild(foot);
+          outer.appendChild(post);
+          container.appendChild(outer);
+          added++;
+        }
+      })
+      .catch(function () { /* feed unreachable — leave page as-is */ });
   });
 })();
