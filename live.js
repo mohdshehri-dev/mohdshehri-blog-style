@@ -165,6 +165,36 @@
   });
 })();
 
+/* --- end-of-post newsletter CTA (item pages) ---------------------------
+       a personal closing line at the end of the post text; clicking it
+       scrolls to the subscribe band and briefly highlights it */
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    if (!document.body.classList.contains('item')) return;
+    var body = document.querySelector('.post-body');
+    var band = document.querySelector('.subscribe-band');
+    if (!body || !band || document.querySelector('.post-cta')) return;
+    var cta = document.createElement('div');
+    cta.className = 'post-cta';
+    cta.innerHTML = 'إن أحببتَ ما قرأت، <a href="#subscribe">فاشترك ليصلك جديد المدونة</a>.';
+    body.appendChild(cta);
+    cta.querySelector('a').addEventListener('click', function (e) {
+      e.preventDefault();
+      band.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      band.classList.add('band-glow');
+      setTimeout(function () {
+        var em = band.querySelector('input[type="email"], input[name="email_address"]');
+        if (em) em.focus({ preventScroll: true });
+      }, 700);
+      setTimeout(function () { band.classList.remove('band-glow'); }, 2400);
+    });
+  });
+})();
+
 /* --- extra nav pills (added via pipeline, no Layout edit needed) ------- */
 (function () {
   function ready(fn) {

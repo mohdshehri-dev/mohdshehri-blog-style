@@ -212,3 +212,13 @@
   font-size: .88rem !important; color: #93816C !important; margin: 0 0 10px; }
 .post-body div.related-reads ul { margin: 0; padding-inline-start: 1.3em; }
 .post-body div.related-reads li { margin: .35em 0; font-size: .98rem !important; }
+
+/* end-of-post newsletter CTA (item pages, injected by live.js) */
+.post-body div.post-cta { margin-top: 36px; text-align: center !important;
+  font-family: Tajawal, sans-serif !important; font-size: .95rem !important;
+  color: #5B5148 !important; }
+.post-body div.post-cta a { color: #B25B3B !important;
+  border-bottom: 1px solid rgba(178,91,59,.35); }
+.post-body div.post-cta a:hover { border-bottom-color: #B25B3B; }
+.subscribe-band { transition: box-shadow .4s; }
+.subscribe-band.band-glow { box-shadow: 0 0 0 3px rgba(178,91,59,.4); }
