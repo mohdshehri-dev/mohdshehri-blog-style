@@ -176,8 +176,18 @@
   font-size: .85rem !important; color: #93816C !important; line-height: 1.9 !important;
   border: 1px solid #E7DBC8; border-radius: 10px; padding: 12px 16px;
   background: #FDFAF4 !important; margin: 18px 0 34px; }
-.post-body div.qa-item { border-top: 1px solid #E7DBC8; padding: 24px 0 4px; }
+.post-body div.qa-item { border-top: 1px solid #E7DBC8; padding: 24px 0 4px;
+  scroll-margin-top: 16px;
+  transition: background .5s, box-shadow .5s; }
 .post-body div.qa-item h3 { margin: 0 0 10px; }
+.post-body div.qa-item.qa-glow { background: rgba(178,91,59,.07) !important;
+  box-shadow: 0 0 0 3px rgba(178,91,59,.4); }
+.post-body p.qa-share { margin: 4px 0 8px; text-align: left;
+  font-family: Tajawal, sans-serif !important; font-size: .78rem !important; }
+.post-body p.qa-share a { color: #93816C !important; text-decoration: none;
+  cursor: pointer; border-bottom: 1px dashed rgba(147,129,108,.5); }
+.post-body p.qa-share a:hover { color: #B25B3B !important;
+  border-bottom-color: #B25B3B; }
 .post-body p.qa-more, .post-body p.qa-more a { font-family: Tajawal, sans-serif !important;
   font-size: .88rem !important; }
 .post-body p.qa-more a { text-decoration: none;

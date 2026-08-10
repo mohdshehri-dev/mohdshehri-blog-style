@@ -401,6 +401,48 @@
   });
 })();
 
+/* --- أسئلة المرضى: per-question copy-link + anchor glow ---------------- */
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    if (location.pathname !== '/p/blog-page_11.html') return;
+    var items = document.querySelectorAll('.qa-item[id]');
+    if (!items.length) return;
+    items.forEach(function (item) {
+      var url = 'https://www.mohdshehri.com/p/blog-page_11.html#' + item.id;
+      var p = document.createElement('p');
+      p.className = 'qa-share';
+      var a = document.createElement('a');
+      a.textContent = 'انسخ رابط السؤال';
+      a.href = url;
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        function ok() {
+          a.textContent = 'نُسخ الرابط ✓';
+          setTimeout(function () { a.textContent = 'انسخ رابط السؤال'; }, 2000);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(ok, function () { window.prompt('انسخ الرابط:', url); });
+        } else {
+          window.prompt('انسخ الرابط:', url);
+        }
+      });
+      p.appendChild(a);
+      item.appendChild(p);
+    });
+    // arriving via #qa-… : make sure we land on the question and glow it
+    var target = location.hash && document.querySelector('.qa-item' + location.hash.replace(/[^#\w-]/g, ''));
+    if (target) {
+      target.scrollIntoView();
+      target.classList.add('qa-glow');
+      setTimeout(function () { target.classList.remove('qa-glow'); }, 2400);
+    }
+  });
+})();
+
 /* --- hide صحة posts from the main chronological stream -----------------
        (homepage + its older/newer pagination). They stay fully visible on
        the صحة label page, in search results, archives, and direct links. */
