@@ -317,6 +317,7 @@
     name: 'محمد عبدالله الشهري',
     alternateName: 'Dr. Mohammed Abdullah Alshehri',
     url: 'https://www.mohdshehri.com/',
+    image: 'https://mohdshehri-dev.github.io/mohdshehri-blog-style/profile-photo.jpg',
     jobTitle: 'استشاري أمراض الكلى وأستاذ مشارك بكلية الطب',
     affiliation: {
       '@type': 'CollegeOrUniversity',
@@ -326,6 +327,23 @@
     sameAs: ['https://www.mohdshehri.com/p/blog-page_08.html']
   });
   document.head.appendChild(s);
+})();
+
+/* --- author portrait: keep the footer profile photo independent of the
+       Blogger/Google account avatar ------------------------------------- */
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    var image = document.querySelector('.author-card .profile-img');
+    if (!image) return;
+    image.src = 'https://mohdshehri-dev.github.io/mohdshehri-blog-style/profile-photo.jpg';
+    image.alt = 'د. محمد عبدالله الشهري';
+    image.width = 96;
+    image.height = 96;
+  });
 })();
 
 /* --- author card: link to the doctor page ------------------------------ */
